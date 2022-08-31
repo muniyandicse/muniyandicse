@@ -2,7 +2,7 @@ import tkinter
 from tkinter import *
 import mysql.connector
 
-db = mysql.connector.connect(host='localhost',uaer='root',password='',db='python')
+db = mysql.connector.connect(host='localhost',user='root',password='',db='authenticate')
 cursor = db.cursor()
 
 
@@ -18,23 +18,23 @@ def admin():
     Entry(adminframe,textvariable=adminusername,font=('Arial',12,'bold')).pack()
     Label(adminframe, text='password', font=('Arial', 12, 'bold')).pack()
     Entry(adminframe, textvariable=adminpassword, font=('Arial', 12, 'bold')).pack()
-    Button(authenticate, text='login',command=adminlogin, width='12', height='1', font=('calibri', 10, 'bold'), bg='gray', fg='white')
+    Button(adminframe, text='Login',command=adminlogin, width='12', height='1', font=('calibri', 10, 'bold'), bg='gray', fg='white').pack()
 
 def adminlogin():
     username = adimusername.get()
     password = adminpassword.get()
     if username == 'admin' and password == 'admin@123':
-        thinter.messagebox.showinfo('Authenticaton','wlcome Admin')
+        thinter.messagebox.showinfo('Authenticaton','wlecome Admin')
     else:
         tkinter.Messagebox.showinfo('authenticate','Invalid')
 
 def userlogin():
     username = userusername.get()
     password = userpassword.get()
-  cursor.execute('select * from details were username=%s and password=%s',[username,passwword])
-  a = cursor.etchone()
-  if a==None:
-        thinter.messagebox.showinfo('Authenticaton', 'wlcome user')
+    cursor.execute('select * from details were username=%s and password=%s',[username,password])
+    a = cursor.etchone()
+    if a==None:
+        thinter.messagebox.showinfo('Authenticaton', 'wlecome user')
     else:
         tkinter.Messagebox.showinfo('authenticate', 'Invalid')
 def user():
@@ -103,7 +103,7 @@ def main():
     authenticate.geometry('1080x650')
     authenticate.title('Authenticate & Authorization')
     authenticate.configure(bg='lightblue')
-    button1 = Button(authenticate,text='admin',command=admin,width='15',height='1',font=('calibri',13,'bold'),bg='gray',fg='white')
+    button1 = Button(authenticate,text='Admin',command=admin,width='15',height='1',font=('calibri',13,'bold'),bg='gray',fg='white')
     button1.pack()
     button2 = Button(authenticate, text='User',command=user, width='15', height='1', font=('calibri', 13, 'bold'), bg='gray', fg='white')
     button2.pack()
